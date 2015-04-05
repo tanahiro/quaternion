@@ -55,7 +55,17 @@ class TestQuaternion < Minitest::Test
     assert(@q == Quaternion.new(1.0, 2.0, 3.0, 4.0))
   end
 
-  def test_multiplier
+  def test_add
+    expected = Quaternion.new(6.0, 8.0, 10.0, 12.0)
+    assert_equal(expected, @q + Quaternion.new(5, 6, 7, 8))
+  end
+
+  def test_sub
+    expected = Quaternion.new(-4.0, -2.0, 0.0, 2.0)
+    assert_equal(expected, @q - Quaternion.new(5, 4, 3, 2))
+  end
+
+  def test_multiply
     expected = Quaternion.new(2.0, 4.0, 6.0, 8.0)
     assert_equal(expected, @q*2)
     assert_equal(expected, 2*@q)

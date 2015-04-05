@@ -104,6 +104,30 @@ class Quaternion
   end
 
   ##
+  # Returns result of addition.
+  #   q1 = Quaternion.new(1.0, 2.0, 3.0, 4.0)
+  #   q2 = Quaternion.new(5.0, 6.0, 7.0, 8.0)
+  #   q1 + q2 # => Quaternion(6.0; Vector[8.0, 10.0, 12.0])
+  def + other
+    w = @w + other[:w]
+    v = @v + other[:v]
+
+    return Quaternion.new(w, v)
+  end
+
+  ##
+  # Returns result of subtraction
+  #   q1 = Quaternion.new(1.0, 2.0, 3.0, 4.0)
+  #   q2 = Quaternion.new(5.0, 4.0, 3.0, 2.0)
+  #   q1 - q2 # => Quaternion(-4.0; Vector[-2.0, 0.0, 2.0])
+  def - other
+    w = @w - other[:w]
+    v = @v - other[:v]
+
+    return Quaternion.new(w, v)
+  end
+
+  ##
   # Returns product with +other+.
   # +other+ can be Quaternion or Numeric.
   #   q = Quaternion.new(1.0, 2.0, 3.0, 4.0)
