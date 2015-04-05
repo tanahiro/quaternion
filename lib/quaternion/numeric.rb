@@ -1,5 +1,5 @@
 
-class Float
+class Float # :nodoc:
   alias_method :multi_org, :*
 
   def * other
@@ -11,7 +11,7 @@ class Float
   end
 end
 
-class Fixnum
+class Fixnum # :nodoc:
   alias_method :multi_org, :*
 
   def * other
