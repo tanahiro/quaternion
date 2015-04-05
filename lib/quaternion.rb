@@ -10,6 +10,24 @@ class Quaternion
   include Math
 
   ##
+  # Returns an instance of Quaternion for rotateion aroud +axis+ with angle
+  # +theta+.
+  #   qrot = Quaternion.rotation([1.0, 1.0, 1.0], PI/2.0)
+  def self.rotation axis, theta
+    case axis
+    when Array
+      axis = Vector.elements(axis, true)
+      axis = axis.normalize
+    when Vector
+      axis = axis.normalize
+    else
+      raise ArgumentError, "Invalid type"
+    end
+
+    return Quaternion.new(cos(theta/2.0), axis*sin(theta/2.0))
+  end
+
+  ##
   # Returns an instance of Quaternion.
   # The following code instanciate a quaternion of
   # q0 + q1 _i_ + q2 _j_ + q3 _k_, where q0 = 1, q1 = 2, q2 = 3 and q3 = 4.
@@ -221,5 +239,35 @@ class Quaternion
     return "Quaternion(#{@w}; #{@v})"
   end
   alias to_s inspect
+
+  ##
+  # Rotates a point +v+. This method does not check if the quaternion's norm is
+  # 1 or not.
+  #   qrot = Quaternion.rotation([1.0, 1.0, 1.0], PI/2.0)
+  #   qrot.rotate([1.0, 0.0, 0.0]) # =>[0.3333333333333334, 0.9106836025229592, -0.24401693585629253]
+  def rotate v
+    q_v = Quaternion.new(0.0, v)
+
+    res = self*q_v*(self.conjugate)
+
+    case v
+    when Array
+      return res[:v].to_a
+    when Vector
+      return res[:v]
+    end
+  end
+
+  private
+  def to_vector v
+    case v
+    when Array
+      Vector.elements(v, true)
+    when Vector
+      v.clone
+    else
+      raise ArgumentError, "Fail to convert to Vector"
+    end
+  end
 end
 
