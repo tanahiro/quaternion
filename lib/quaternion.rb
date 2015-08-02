@@ -2,7 +2,6 @@ root_dir = "#{__dir__}/.."
 
 require 'matrix'
 require "#{root_dir}/lib/quaternion/version"
-require "#{root_dir}/lib/quaternion/numeric"
 
 ##
 # Class for Quaternion calculation.
@@ -258,6 +257,15 @@ class Quaternion
     end
   end
 
+  ##
+  # Inverts order of multiplication, so our math methods
+  # will be used for types that don't know how to deal Quaternions
+  #   q = Quaternion.new(1.0, 2.0, 3.0, 4.0)
+  #   2*q # => Quarternion(2.0; Vector[4.0, 6.0, 8.0])
+  def coerce(n)
+    [self, n]
+  end
+
   private
   def to_vector v
     case v
@@ -270,4 +278,3 @@ class Quaternion
     end
   end
 end
-
