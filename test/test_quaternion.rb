@@ -1,4 +1,4 @@
-require "#{__dir__}/minitest_helper"
+require_relative "minitest_helper"
 
 include Math
 
@@ -48,15 +48,15 @@ class TestQuaternion < Minitest::Test
     @q[0] = -1.0
     expected = Quaternion.new(-1.0, 2.0, 3.0, 4.0)
     quaternion_assert_in_delta(expected, @q)
-    
+
     @q[1] = -2.0
     expected = Quaternion.new(-1.0, -2.0, 3.0, 4.0)
     quaternion_assert_in_delta(expected, @q)
-    
+
     @q[2] = -3.0
     expected = Quaternion.new(-1.0, -2.0, -3.0, 4.0)
     quaternion_assert_in_delta(expected, @q)
-    
+
     @q[3] = -4.0
     expected = Quaternion.new(-1.0, -2.0, -3.0, -4.0)
     quaternion_assert_in_delta(expected, @q)

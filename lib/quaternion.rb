@@ -1,7 +1,5 @@
-root_dir = "#{__dir__}/.."
-
 require 'matrix'
-require "#{root_dir}/lib/quaternion/version"
+require "quaternion/version"
 
 ##
 # Class for Quaternion calculation.
