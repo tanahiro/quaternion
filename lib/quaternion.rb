@@ -8,6 +8,7 @@ require "#{root_dir}/lib/quaternion/numeric"
 # Class for Quaternion calculation.
 class Quaternion
   include Math
+  extend Math
 
   ##
   # Returns an instance of Quaternion for rotateion aroud +axis+ with angle
